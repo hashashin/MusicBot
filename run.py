@@ -115,8 +115,8 @@ class PIP(object):
 
     @classmethod
     def get_requirements(cls, file='requirements.txt'):
-        from pip.req import parse_requirements
-        return list(parse_requirements(file))
+        import pip._internal.req as requirements
+        return list(requirements.parse_requirements(file))
 
 
 # Setup initial loggers
@@ -176,7 +176,7 @@ def finalize_logging():
     dlog = logging.getLogger('discord')
     dlh = logging.StreamHandler(stream=sys.stdout)
     dlh.terminator = ''
-    dlh.setFormatter(logging.Formatter('.'))
+    dlh.setFormatter(logging.Formatter())
     dlog.addHandler(dlh)
 
 
